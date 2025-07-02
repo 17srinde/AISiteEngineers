@@ -84,6 +84,41 @@ function verifyUser() {
     alert("Your email has been verified successfully!");
     window.location.href = 'index.html'; // Redirect to homepage or login page
   });
+
+  function showMessage(message, isSuccess) {
+      const box = document.getElementById('messageBox');
+      box.className = 'alert ' + (isSuccess ? 'alert-success' : 'alert-danger');
+      box.textContent = message;
+      box.style.display = 'block';
+    }
+
+    function verifyUser() {
+      const email = document.getElementById('emailInputVerify').value;
+      const code = document.getElementById('codeInputVerify').value;
+
+      const userPool = new AmazonCognitoIdentity.CognitoUserPool({
+        UserPoolId: _config.cognito.userPoolId,
+        ClientId: _config.cognito.userPoolClientId
+      });
+
+      const userData = {
+        Username: email,
+        Pool: userPool
+      };
+
+      const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+      cognitoUser.confirmRegistration(code, true, function(err, result) {
+        if (err) {
+          showMessage(err.message || JSON.stringify(err), false);
+          return;
+        }
+        showMessage("✅ Your email has been successfully verified!", true);
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2500);
+      });
+    }
 }
 
 
