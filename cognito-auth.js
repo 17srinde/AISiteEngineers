@@ -22,7 +22,9 @@ const registerUser = () => {
       alert(err.message || JSON.stringify(err));
       return;
     }
-    
+
+    // ← INSERT REDIRECT HERE
+    window.location.href = 'verify.html';
 });
 
     alert('Sign-up successful! Please check your email for the verification code.');
