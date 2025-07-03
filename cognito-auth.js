@@ -22,6 +22,11 @@ const registerUser = () => {
       alert(err.message || JSON.stringify(err));
       return;
     }
+    
+    // sign-up succeeded → redirect now
+    window.location.href = 'verify.html';
+});
+
     alert('Sign-up successful! Please check your email for the verification code.');
     // Redirect to verification page or show code input
   });
