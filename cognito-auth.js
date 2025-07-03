@@ -23,8 +23,6 @@ const registerUser = () => {
       return;
     }
     
-    // sign-up succeeded → redirect now
-    window.location.href = 'verify.html';
 });
 
     alert('Sign-up successful! Please check your email for the verification code.');
